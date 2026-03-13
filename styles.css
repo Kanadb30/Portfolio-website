@@ -271,7 +271,6 @@ section {
   padding: var(--space-md) 0;
   border-bottom: 1px solid rgba(244,244,240,0.2);
   align-items: center;
-  group;
 }
 .project-row:first-child {
   border-top: 1px solid rgba(244,244,240,0.2);
