@@ -1,4 +1,4 @@
-# Kanad Bajpai — Software Engineer Portfolio
+# Kanad Bajpai — Student Portfolio
 
 A minimalist, typography-driven developer portfolio built with high-performance HTML, CSS, and vanilla JS. Designed with an editorial brutalist aesthetic to provide a highly optimized, premium browsing experience.
 
