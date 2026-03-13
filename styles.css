@@ -1,0 +1,380 @@
+/* ========== EDITORIAL BRUTALISM & FLUID TYPOGRAPHY ========== */
+:root {
+  --bg: #0a0a0a;
+  --text: #f4f4f0;
+  --text-muted: #888888;
+  --accent: #FF3B00; /* Vermilion */
+  
+  /* Fluid Typography Scale */
+  --display-huge: clamp(4rem, 12vw, 15rem);
+  --heading-1: clamp(3rem, 8vw, 8rem);
+  --heading-2: clamp(2rem, 5vw, 5rem);
+  --heading-3: clamp(1.5rem, 3vw, 3rem);
+  --body-lg: clamp(1.125rem, 2vw, 1.5rem);
+  --body-base: clamp(1rem, 1.5vw, 1.125rem);
+  
+  /* Fluid Spacing */
+  --space-sm: clamp(1rem, 2vw, 2rem);
+  --space-md: clamp(2rem, 5vw, 5rem);
+  --space-lg: clamp(4rem, 10vw, 10rem);
+  --space-xl: clamp(8rem, 20vw, 20rem);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Basics */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Using Lenis for scroll, so we disable native smooth scroll if it interferes, but Lenis handles it */
+  font-size: 16px;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Manrope', -apple-system, sans-serif;
+  line-height: 1.4;
+  overflow-x: hidden;
+  cursor: none; /* Hide default for custom cursor */
+}
+
+/* Typography Fonts */
+h1, h2, .display-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.sans-text {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* Custom Cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: var(--text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-expo), height 0.3s var(--ease-expo);
+  will-change: transform;
+}
+.cursor.hovered {
+  width: 80px;
+  height: 80px;
+  background-color: var(--accent);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Link Styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none; /* Let custom cursor handle it */
+  position: relative;
+  display: inline-block;
+}
+a.underline-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.5s var(--ease-expo);
+}
+a.underline-link:hover::after {
+  width: 100%;
+}
+
+/* Nav */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+.logo {
+  font-size: var(--body-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.nav-links {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: var(--body-base);
+}
+
+/* Layout Containers */
+.container {
+  padding: 0 var(--space-md);
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+section {
+  padding: var(--space-xl) 0;
+}
+
+/* ========== HERO SECTION (Recruiter & Designer focused) ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--space-xl);
+}
+.hero-subtitle {
+  font-size: var(--body-lg);
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-subtitle::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent);
+}
+.hero-title {
+  font-size: var(--display-huge);
+  text-transform: none;
+}
+.hero-bottom {
+  margin-top: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  font-size: var(--body-lg);
+  max-width: 1000px;
+}
+.hero-bottom p {
+  color: var(--text-muted);
+}
+
+/* ========== SKILLS MARQUEE (Recruiter UI) ========== */
+.skills-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: var(--space-sm) 0;
+  border-top: 1px solid rgba(244,244,240,0.1);
+  border-bottom: 1px solid rgba(244,244,240,0.1);
+  display: flex;
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+.marquee-item {
+  font-size: var(--heading-3);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  padding: 0 2rem;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+}
+.marquee-item::after {
+  content: '✦';
+  font-size: 1rem;
+  margin-left: 4rem;
+  color: var(--accent);
+  font-style: normal;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ========== LIST SECTIONS (Experience / Education) ========== */
+.list-section {
+  border-top: 2px solid var(--text);
+  margin-top: var(--space-lg);
+}
+.list-header {
+  font-size: var(--heading-2);
+  padding: var(--space-sm) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.list-item {
+  border-top: 1px solid rgba(244,244,240,0.1);
+  padding: var(--space-md) 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: var(--space-sm);
+  transition: background-color 0.4s var(--ease-expo);
+}
+.list-item:hover {
+  background-color: rgba(244,244,240,0.03);
+}
+.item-year {
+  font-size: var(--body-base);
+  color: var(--text-muted);
+}
+.item-title {
+  font-size: var(--heading-3);
+  line-height: 1.1;
+}
+.item-desc {
+  font-size: var(--body-base);
+  color: var(--text-muted);
+}
+
+/* ========== PROJECTS (Minimalist Image-less format) ========== */
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+}
+.project-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid rgba(244,244,240,0.2);
+  align-items: center;
+  group;
+}
+.project-row:first-child {
+  border-top: 1px solid rgba(244,244,240,0.2);
+}
+.project-name {
+  font-size: var(--heading-1);
+  transition: transform 0.6s var(--ease-expo), color 0.6s var(--ease-expo);
+  transform-origin: left;
+}
+.project-tags {
+  text-align: right;
+  font-size: var(--body-base);
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.project-row:hover .project-name {
+  transform: translateX(2rem);
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* ========== FOOTER CO-SIGN / CTA ========== */
+.giant-cta {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+.cta-text {
+  font-size: var(--display-huge);
+  line-height: 0.8;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+}
+.cta-text span {
+  display: block;
+}
+.cta-text .italic {
+  color: var(--text-muted);
+}
+.cta-text:hover .italic {
+  color: var(--accent);
+  transition: color 0.4s ease;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-top: 1px solid rgba(244,244,240,0.1);
+  font-size: var(--body-base);
+  color: var(--text-muted);
+}
+
+/* ========== GSAP-STYLE REVEAL ANIMATIONS (Intersection Observer) ========== */
+.reveal-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+.reveal-text {
+  display: inline-block;
+  transform: translateY(120%);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.reveal-text.in-view {
+  transform: translateY(0);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .list-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .item-title {
+    font-size: var(--heading-2);
+  }
+  .hero-bottom {
+    grid-template-columns: 1fr;
+  }
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .project-tags {
+    text-align: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .cursor {
+    display: none; /* Disable custom cursor on mobile */
+  }
+  a { cursor: pointer; }
+}
